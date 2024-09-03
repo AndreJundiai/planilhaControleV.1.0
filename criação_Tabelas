@@ -1,0 +1,43 @@
+-- novoBD.pessoa definition
+
+CREATE TABLE `pessoa` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(25) NOT NULL,
+  `nascimento` date NOT NULL,
+  `endereco` varchar(99) NOT NULL,
+  `telefone` varchar(15) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+
+-- novoBD.pontoRegistro definition
+
+CREATE TABLE `pontoRegistro` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `dia` varchar(10) DEFAULT NULL,
+  `hora_entrada` time DEFAULT NULL,
+  `hora_almoço_entrada` time DEFAULT NULL,
+  `hora_almoço_saida` time DEFAULT NULL,
+  `hora_saida` time DEFAULT NULL,
+  `horas_trabalhadas` bigint(20) DEFAULT NULL,
+  `diaSemana` varchar(100) DEFAULT NULL,
+  `idUsuario` int(100) DEFAULT NULL,
+  `minutosTrabalhado` int(10) DEFAULT NULL,
+  `bancodeHoras` bigint(20) DEFAULT NULL,
+  `FeriadoFinaldeSemana` varchar(10) DEFAULT NULL,
+  `justificativa` varchar(100) DEFAULT NULL,
+  `atestado` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2734 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- novoBD.registroPonto definition
+
+CREATE TABLE `registroPonto` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `hora_entrada` time NOT NULL DEFAULT current_timestamp(),
+  `data_almoço_entrada` timestamp NOT NULL DEFAULT current_timestamp(),
+  `data_almoço_saida` timestamp NOT NULL DEFAULT current_timestamp(),
+  `data_saida` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
