@@ -1,0 +1,8 @@
+CREATE DEFINER=`root`@`localhost` TRIGGER calcular_horas_trabalhadas
+BEFORE UPDATE ON pontoRegistro
+FOR EACH ROW
+BEGIN
+    IF NEW.hora_saida IS NOT NULL THEN
+        SET NEW.horas_trabalhadas = TIMESTAMPDIFF(MINUTE, NEW.hora_entrada, NEW.hora_saida) - TIMESTAMPDIFF(MINUTE, NEW.hora_almoço_entrada, NEW.hora_almoço_saida);
+    END IF;
+END

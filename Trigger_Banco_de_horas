@@ -1,0 +1,24 @@
+CREATE DEFINER=`root`@`localhost` TRIGGER calcula_banco_horas
+BEFORE UPDATE ON pontoRegistro
+FOR EACH ROW
+BEGIN
+    DECLARE diferenca_horas INT;
+
+    -- Verifica se é feriado ou final de semana
+    IF NEW.FeriadoFinaldeSemana =  'TRUE' THEN
+        SET NEW.bancodeHoras =  NEW.horas_trabalhadas; -- Não realiza o cálculo para feriados ou finais de semana
+    ELSE
+        SELECT NEW.horas_trabalhadas - us.jornadadeTrabalho  
+        INTO diferenca_horas
+        FROM usuarius us
+        WHERE us.id = NEW.idUsuario;
+
+        IF diferenca_horas > 10 THEN
+            SET NEW.bancodeHoras = diferenca_horas;
+        ELSEIF diferenca_horas < -10 THEN
+            SET NEW.bancodeHoras = diferenca_horas;
+        ELSE
+            SET NEW.bancodeHoras = 0; -- ou outro valor padrão se necessário
+        END IF;
+    END IF;
+END
